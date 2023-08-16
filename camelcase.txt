@@ -1,0 +1,121 @@
+
+ package co.ke.emtechhouse.leasing.products.CustomerProducts.ProductSpecificDetails.LAADetails;
+
+ import lombok.AllArgsConstructor;
+ import lombok.Data;
+ import lombok.NoArgsConstructor;
+ import lombok.ToString;
+
+ import javax.persistence.*;
+ import java.util.List;
+
+ @Data
+ @AllArgsConstructor
+ @NoArgsConstructor
+ @ToString
+ @Entity
+ public class LAADetails {
+     @Id
+     @GeneratedValue(strategy = GenerationType.AUTO)
+     private Long id;
+     @Column(length = 150)
+     private Double loanAmtMin = 0.00;
+     @Column(length = 150)
+     private Double loanMaxAmt = 0.00;
+     private String individualLimits;
+     private String individualLimitsProduct;
+     @Column(length = 150)
+     private String loanPeriodMinMm = "1";
+     @Column(length = 150)
+     private String loanPeriodMaxMm = "12";
+     @Column(length = 150)
+     private String loanRepaymentMethod;
+     @Column(length = 1500)
+     private String loanRepaymentHoldOpAc = "N";
+     @Column(length = 150)
+     private String loanRepaymentUprontInstallmentCollection = "N";
+     @Column(length = 1500)
+     private String flowOffsetBasedOn;
+     //    chronologicalOrder[]
+ //interest repayment details
+     @Column(length = 150)
+     private String intBase;
+     @Column(length = 150)
+     private String intProd;
+     @Column(length = 150)
+     private String intRouteThrough;
+     @Column(length = 150)
+     private String feeRoutedThrough;
+     @Column(length = 150)
+     private String loanIntAc;
+     @Column(length = 150)
+     private String penalIntRecognitionMethod;
+     //INTEREST DETAILS
+     @Column(length = 150)
+     private String intOnPrincipal = "N";
+     @Column(length = 150)
+     private String principalDemandOverdueAtEndmonth;
+     @Column(length = 150)
+     private Integer principalOverdueAfterMm = 1;
+     @Column(length = 150)
+     private Integer intOverdueAfterMm = 1;
+     @Column(length = 150)
+     private Integer chargeOverdueAfterMm = 1;
+     @Column(length = 150)
+     private String intOnDemand;
+     @Column(length = 150)
+     private String overdueIntOnPrincipal = "N";
+     @Column(length = 150)
+     private String intDemandOverdueAtEndMonth = "N";
+     @Column(length = 150)
+     private String applyPreferentialIntForOverdueInt = "N";
+     @Column(length = 150)
+     private String chargeDemandOverdueEndMonth = "N";
+     @Column(length = 150)
+     private String intRateBasedOnLoanAmt = "N";
+     @Column(length = 150)
+     private String gracePeriodForLateFeeMm = "1";
+     @Column(length = 150)
+     private String applyLateFeeForDelayedPayment;
+     //PENAL INTEREST DETAILS
+     @Column(length = 150)
+     private String penalIntOnPrincipalOverdue = "N";
+     @Column(length = 30)
+     private String penalIntOnIntDemandOverdue = "N";
+     @Column(length = 150)
+     private String penalIntBasedOn;
+     @Column(length = 150)
+     private String penalIntProductMethod;
+     @Column(length = 150)
+     private String normalIntProductMethod;
+     @Column(length = 150)
+     private String penalIntRateMethod;
+     @Column(length = 150)
+     private String gracePeriodForPenalIntMm;
+     //EQUATED INSTALLMENT
+     @Column(length = 150)
+     private String equatedInstallment;
+     @Column(length = 150)
+     private String intCompoundFreq;
+     @Column(length = 150)
+     private String outstandingAmtAfterLastInst;
+     @Column(length = 150)
+     private String eiFormula;
+     @Column(length = 150)
+     private String shiftInstallmentForHoliday;
+     @Column(length = 150)
+     private String includMaturityDateIncaseForHoliday = "N";
+     //ADVANCE INT
+     @Column(length = 150)
+     private String upfrontIntCollection;
+     @Column(length = 150)
+     private String discountedInt;
+
+     private Integer minGuarantorCount = 0;
+     private Integer maxGuarantorCount = 100;
+     private Double penalInt = 0.0;
+
+     @OneToMany(targetEntity = LoanLimitCondition.class, cascade = CascadeType.ALL)
+     @JoinColumn(name = "laaDetails", referencedColumnName = "id")
+     private List<LoanLimitCondition> loanLimitsByProduct;
+ }
